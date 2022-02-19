@@ -1,0 +1,91 @@
+---
+elasticsearch:
+  auth:
+    enabled: true
+    user: "elastic"
+    password: "YY_21eFpsgLCFVkmEHLr"
+    existingSecret:
+      name: null
+      key: null
+  includeTagKey: true
+  setOutputHostEnvVar: true
+  # If setOutputHostEnvVar is false the hosts value is ignored
+  # If you are configuring an AWS signing sidecar, hosts should be the network
+  # address of the sidecar, like "localhost:8080"
+  hosts: ["elasticsearch-master:9200"]
+  indexName: "fluentd"
+  logstash:
+    enabled: true
+    prefix: "logstash"
+    prefixSeparator: "-"
+    dateformat: "%Y.%m.%d"
+  ilm:
+    enabled: false
+    policy_id: logstash-policy
+    policy: {}
+      # example for ilm policy config
+      # phases:
+      #   hot:
+      #     min_age: 0ms
+      #     actions:
+      #       rollover:
+      #         max_age: 30d
+      #         max_size: 20gb
+      #       set_priority:
+      #           priority: 100
+      #   delete:
+      #     min_age: 60d
+      #     actions:
+      #       delete:
+    policies: {}
+      # example for ilm policies config
+      # ilm_policy_id1: {}
+      # ilm_policy_id2: {}
+    policy_overwrite: false
+  template:
+    enabled: false
+    overwrite: false
+    useLegacy: true
+    name: fluentd-template
+    file: fluentd-template.json
+    content: |-
+      {
+        "index_patterns": [
+            "logstash-*"
+        ],
+        "settings": {
+            "index": {
+                "number_of_replicas": "1"
+            }
+        }
+      }
+  path: ""
+  # If you are configuring an AWS signing sidecar, scheme should be "http"
+  scheme: "http"
+  sslVerify: true
+  sslVersion: "TLSv1_2"
+  outputType: "elasticsearch"
+  typeName: "_doc"
+  logLevel: "info"
+  log400Reason: false
+  reconnectOnError: true
+  reloadOnFailure: false
+  reloadConnections: false
+  requestTimeout: "5s"
+  suppressTypeName: false
+  includeTimestamp: false
+  buffer:
+    enabled: true
+    # ref: https://docs.fluentd.org/configuration/buffer-section#chunk-keys
+    chunkKeys: ""
+    type: "file"
+    path: "/var/log/fluentd-buffers/kubernetes.system.buffer"
+    flushMode: "interval"
+    retryType: "exponential_backoff"
+    flushThreadCount: 2
+    flushInterval: "5s"
+    retryForever: true
+    retryMaxInterval: 30
+    chunkLimitSize: "2M"
+    totalLimitSize: "512M"
+    overflowAction: "block"

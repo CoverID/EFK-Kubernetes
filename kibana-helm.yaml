@@ -1,0 +1,12 @@
+---
+extraEnvs:
+  - name: "NODE_OPTIONS"
+    value: "--max-old-space-size=1800"
+  - name: "ELASTICSEARCH_USERNAME"
+    value: "elastic"
+  - name: "ELASTICSEARCH_PASSWORD"
+    value: "YY_21eFpsgLCFVkmEHLr"
+  - name: "elasticsearch.username"
+    value: "kibana_system"
+  - name: "elasticsearch.password"
+    value: "V40*Yu4yC2AFlohJoNpJ"
