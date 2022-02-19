@@ -3,6 +3,9 @@
 ## Requirements:
 * [Helm](https://helm.sh/docs/intro/install/)
 
+# NOTES
+**change all password with yours**
+
 ## Setup
 ```console
 # create namespace logging
