@@ -3,8 +3,7 @@
 ## Requirements:
 * [Helm](https://helm.sh/docs/intro/install/)
 
-# NOTES
-**change all password with yours**
+# NOTES: change all password with yours
 
 ## Setup
 ```console
