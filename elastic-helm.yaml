@@ -15,6 +15,7 @@ extraEnvs:
 esConfig:
   elasticsearch.yml: |
     xpack.security.enabled: true
+    xpack.security.authc.api_key.enabled: true
 
 # Request smaller persistent volumes.
 volumeClaimTemplate:
