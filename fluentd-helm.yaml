@@ -3,7 +3,7 @@ elasticsearch:
   auth:
     enabled: true
     user: "elastic"
-    password: "YY_21eFpsgLCFVkmEHLr"
+    password: "2vjW?zzrynSdrr=4"
     existingSecret:
       name: null
       key: null
