@@ -1,4 +1,4 @@
-# EFK (Elastic, Fluentd, Kibana) on Kubernetes
+# EFK (Elastic, Fluentd, Kibana) on Kubernetes (GKE)
 
 ## Requirements:
 * [Helm](https://helm.sh/docs/intro/install/)
@@ -28,9 +28,8 @@ helm install kibana bitnami/kibana -f kibana-helm.yaml
 # wait until the kibana pods ready
 kubectl get pods
 
-# create config-map for fluentd to connect elasticsearch
-kubectl apply -f elastic-configmap.yaml
+# expose kibana when the pods ready
 
 # install fluentd
-helm install fluentd bitnami/fluentd --set aggregator.configMap=elasticsearch-output --set aggregator.extraEnv[0].name=ELASTIC_HOST --set aggregator.extraEnv[0].value=elasticsearch-coordinating-only --set aggregator.extraEnv[1].name=ELASTIC_PORT --set aggregator.extraEnv[1].value=9200 --set aggregator.extraEnv[2].name=ELASTIC_USERNAME --set aggregator.extraEnv[2].value=elastic --set aggregator.extraEnv[3].name=ELASTIC_PASSWORD --set aggregator.extraEnv[3].value=12345678
+coming soon
 ```
