@@ -23,7 +23,7 @@ helm install elasticsearch bitnami/elasticsearch -f elastic-helm.yaml
 kubectl get pods
 
 # install kibana and connect to elasticsearch
-helm install kibana bitnami/kibana -f kibana-helm.yaml
+helm install kibana bitnami/kibana -f kibana-helm.yaml --set service.type=LoadBalancer
 
 # wait until the kibana pods ready
 kubectl get pods
