@@ -1,12 +1,12 @@
----
-extraEnvs:
-  - name: "NODE_OPTIONS"
-    value: "--max-old-space-size=1800"
-  - name: "ELASTICSEARCH_USERNAME"
-    value: "elastic"
-  - name: "ELASTICSEARCH_PASSWORD"
-    value: "2vjW?zzrynSdrr=4"
-  - name: "elasticsearch.username"
-    value: "kibana_system"
-  - name: "elasticsearch.password"
-    value: "jU23XAf-jNJx8XtY"
+elasticsearch:
+  hosts: ["elasticsearch-coordinating-only"]
+  port: "9200"
+  security:
+    auth:
+      enabled: true
+      kibanaUsername: "elastic"
+      kibanaPassword: "12345678"
+    tls:
+      enabled: true
+      existingSecret: elasticsearch-coordinating-only-crt
+      usePemCerts: true
