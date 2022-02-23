@@ -13,23 +13,22 @@ kubectl config set-context --current --namespace=logging
 git clone https://github.com/CoverID/EFK-Kubernetes
 cd EFK-Kubernetes
 
-# add bitnami repository to helm
-helm repo add bitnami https://charts.bitnami.com/bitnami
+# add elastic repository to helm
+helm repo add elastic https://helm.elastic.co
 
 # install elasticsearch
-helm install elasticsearch bitnami/elasticsearch -f elastic-helm.yaml
+helm install elasticsearch elastic/elasticsearch -f elastic-values.yaml
 
 # wait until the elastic pods ready
 kubectl get pods
 
 # install kibana and connect to elasticsearch
-helm install kibana bitnami/kibana -f kibana-helm.yaml --set service.type=LoadBalancer
+helm install kibana elastic/kibana -f kibana-values.yaml --set service.type=LoadBalancer
 
 # wait until the kibana pods ready
 kubectl get pods
 
-# expose kibana when the pods ready
-
 # install fluentd
-coming soon
+helm repo add kokuwa https://kokuwaio.github.io/helm-charts
+helm install fluentd kokuwa/fluentd-elasticsearch -f fluentd-values.yaml
 ```

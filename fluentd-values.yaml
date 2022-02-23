@@ -1,0 +1,93 @@
+---
+elasticsearch:
+  auth:
+    enabled: true
+    user: "elastic"
+    password: "YY_21eFpsgLCFVkmEHLr"
+    existingSecret:
+      name: null
+      key: null
+  includeTagKey: true
+  setOutputHostEnvVar: true
+  hosts: ["elasticsearch-master:9200"]
+  indexName: "fluentd"
+  logstash:
+    enabled: true
+    prefix: "logstash"
+    prefixSeparator: "-"
+    dateformat: "%Y.%m.%d"
+  ilm:
+    enabled: false
+    policy_id: logstash-policy
+    policy: {}
+    policies: {}
+    policy_overwrite: false
+  template:
+    enabled: false
+    overwrite: false
+    useLegacy: true
+    name: fluentd-template
+    file: fluentd-template.json
+    content: |-
+      {
+        "index_patterns": [
+            "logstash-*"
+        ],
+        "settings": {
+            "index": {
+                "number_of_replicas": "1"
+            }
+        }
+      }
+  path: ""
+  scheme: "http"
+  sslVerify: true
+  sslVersion: "TLSv1_2"
+  outputType: "elasticsearch"
+  typeName: "_doc"
+  logLevel: "info"
+  log400Reason: false
+  reconnectOnError: true
+  reloadOnFailure: false
+  reloadConnections: false
+  requestTimeout: "5s"
+  suppressTypeName: false
+  includeTimestamp: false
+  buffer:
+    enabled: true
+    chunkKeys: ""
+    type: "file"
+    path: "/var/log/fluentd-buffers/kubernetes.system.buffer"
+    flushMode: "interval"
+    retryType: "exponential_backoff"
+    flushThreadCount: 2
+    flushInterval: "5s"
+    retryForever: true
+    retryMaxInterval: 30
+    chunkLimitSize: "2M"
+    totalLimitSize: "512M"
+    overflowAction: "block"
+
+service:
+  ports:
+    - name: "forward"
+      type: ClusterIP
+      port: 24224
+
+configMaps:
+  useDefaults:
+    systemConf: true
+    containersInputConf: true
+    containersKeepTimeKey: false
+    systemInputConf: true
+    forwardInputConf: false
+    monitoringConf: true
+    outputConf: true
+
+extraConfigMaps:
+  forward.input.conf: |-
+    <source>
+      @type forward
+      port 24224
+      bind 0.0.0.0
+    </source>

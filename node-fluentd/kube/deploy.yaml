@@ -1,0 +1,49 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "node-fluentd"
+  namespace: "logging"
+  labels:
+    app: "node-fluentd"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "node-fluentd"
+  template:
+    metadata:
+      labels:
+        app: "node-fluentd"
+    spec:
+      containers:
+        - name: "node-fluentd"
+          image: "coverid/node-fluentd"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "node-fluentd-hpa"
+  namespace: "logging"
+  labels:
+    app: "node-fluentd"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "node-fluentd"
+    apiVersion: "apps/v1beta1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+    - type: "Resource"
+      resource:
+        name: "cpu"
+        targetAverageUtilization: 80
