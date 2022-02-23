@@ -14,12 +14,12 @@ app.get("/", function (req, res) {
   let obj = {
     endpoints: ["/ping", "/current-date", "/fibo/:n"],
   };
-  logger.emit("home", obj);
+  logger.emit("/home", obj);
   res.send(obj);
 });
 
 app.get("/ping", function (req, res) {
-  logger.emit("/ping");
+  logger.emit("/ping", {});
   res.send("pong");
 });
 
