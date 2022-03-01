@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@fluent-org/logger": "^1.0.7",
+    "axios": "^0.26.0",
+    "elastic-apm-node": "^3.29.0",
     "express": "^4.17.3"
   }
 }

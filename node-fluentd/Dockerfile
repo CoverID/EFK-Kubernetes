@@ -14,4 +14,4 @@ COPY --from=builder /src/node_modules ./node_modules
 COPY package.json .
 COPY index.js .
 
-CMD node index.js
+CMD npm run start

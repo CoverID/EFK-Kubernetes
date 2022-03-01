@@ -1,0 +1,15 @@
+---
+apmConfig:
+  apm-server.yml: |
+    apm-server:
+      host: "0.0.0.0:8200"
+      auth:
+        api_key:
+          enabled: true
+        secret_token: "YXJKWWtOVFVLZjY0T0V4RDl5Rm5HdThWQVNnMlJMTUhRMXczb3FsYmpocEJlczcwV0l6bXRYWnZQNUNkaWM="
+    queue: {}
+    output:
+      elasticsearch:
+        hosts: ["http://elasticsearch-master:9200"]
+        username: "elastic"
+        password: "YY_21eFpsgLCFVkmEHLr"
