@@ -23,8 +23,8 @@ elasticsearch:
     policies: {}
     policy_overwrite: false
   template:
-    enabled: false
-    overwrite: false
+    enabled: true
+    overwrite: true
     useLegacy: true
     name: fluentd-template
     file: fluentd-template.json
@@ -35,7 +35,11 @@ elasticsearch:
         ],
         "settings": {
             "index": {
-                "number_of_replicas": "1"
+                "number_of_replicas": "1",
+                "lifecycle": {
+                  "name": "7-days-default",
+                  "rollover_alias": "logstash-history"
+                }
             }
         }
       }

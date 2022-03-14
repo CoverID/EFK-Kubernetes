@@ -18,10 +18,10 @@ extraEnvs:
 esConfig:
   elasticsearch.yml: |
     xpack.security.enabled: true
+    xpack.security.transport.ssl.enabled: true
     xpack.security.authc.api_key.enabled: true
-# Request smaller persistent volumes.
 volumeClaimTemplate:
-  accessModes: [ "ReadWriteOnce" ]
+  accessModes: ["ReadWriteOnce"]
   storageClassName: "standard"
   resources:
     requests:
