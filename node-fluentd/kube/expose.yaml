@@ -2,15 +2,15 @@
 apiVersion: "v1"
 kind: "Service"
 metadata:
-  name: "node-fluentd-service"
+  name: "node-hello-service"
   namespace: "logging"
   labels:
-    app: "node-fluentd"
+    app: "node-hello"
 spec:
   ports:
     - protocol: "TCP"
       port: 80
       targetPort: 3000
   selector:
-    app: "node-fluentd"
+    app: "node-hello"
   type: "LoadBalancer"

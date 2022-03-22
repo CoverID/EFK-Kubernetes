@@ -1,6 +1,6 @@
-docker build -t coverid/node-fluentd .
+docker build -t coverid/node-hello .
 
-docker push coverid/node-fluentd
+docker push coverid/node-hello
 
 kubectl apply -f ./kube/deploy.yaml
 

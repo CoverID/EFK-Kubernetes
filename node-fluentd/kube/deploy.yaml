@@ -2,23 +2,23 @@
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
-  name: "node-fluentd"
-  namespace: "logging"
+  name: "node-hello"
+  namespace: "default"
   labels:
-    app: "node-fluentd"
+    app: "node-hello"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: "node-fluentd"
+      app: "node-hello"
   template:
     metadata:
       labels:
-        app: "node-fluentd"
+        app: "node-hello"
     spec:
       containers:
-        - name: "node-fluentd"
-          image: "coverid/node-fluentd"
+        - name: "node-hello"
+          image: "coverid/node-hello"
           resources:
             requests:
               memory: "64Mi"
@@ -31,14 +31,14 @@ spec:
 apiVersion: "autoscaling/v2beta1"
 kind: "HorizontalPodAutoscaler"
 metadata:
-  name: "node-fluentd-hpa"
-  namespace: "logging"
+  name: "node-hello-hpa"
+  namespace: "default"
   labels:
-    app: "node-fluentd"
+    app: "node-hello"
 spec:
   scaleTargetRef:
     kind: "Deployment"
-    name: "node-fluentd"
+    name: "node-hello"
     apiVersion: "apps/v1beta1"
   minReplicas: 1
   maxReplicas: 5
