@@ -1,12 +1,12 @@
-var apm = require('elastic-apm-node').start({
-  serviceName: 'NodeAPMTester',
-  secretToken: 'YXJKWWtOVFVLZjY0T0V4RDl5Rm5HdThWQVNnMlJMTUhRMXczb3FsYmpocEJlczcwV0l6bXRYWnZQNUNkaWM=',
-  serverUrl: 'http://host:8200',
-  environment: 'production'
-})
+// var apm = require('elastic-apm-node').start({
+//   serviceName: 'NodeAPMTester',
+//   secretToken: 'YXJKWWtOVFVLZjY0T0V4RDl5Rm5HdThWQVNnMlJMTUhRMXczb3FsYmpocEJlczcwV0l6bXRYWnZQNUNkaWM=',
+//   serverUrl: 'http://host:8200',
+//   environment: 'production'
+// })
 
 const express = require("express");
-const axios = require('axios')
+const axios = require("axios");
 const app = express();
 
 // const FluentClient = require("@fluent-org/logger").FluentClient;
@@ -42,21 +42,15 @@ app.get("/current-date", function (req, res) {
 
 app.get("/fact", function (req, res) {
   axios
-    .get('http://catfact.ninja/fact')
-    .then(response => {
+    .get("http://catfact.ninja/fact")
+    .then((response) => {
       res.send(response.data.fact);
     })
-    .catch(error => {
-      console.error(error)
-    })
+    .catch((error) => {
+      console.error(error);
+    });
 });
 
 app.listen(3000, function () {
   console.log("Example app listening on port 3000!");
 });
-
-function fibo(n) {
-  // 1
-  if (n < 2) return 1;
-  else return fibo(n - 2) + fibo(n - 1);
-}

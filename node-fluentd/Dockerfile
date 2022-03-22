@@ -1,4 +1,4 @@
-FROM node:13-alpine as builder
+FROM node:latest as builder
 
 WORKDIR /src
 
@@ -6,7 +6,7 @@ COPY package.json .
 COPY package-lock.json .
 RUN npm install
 
-FROM node:13-alpine as runner
+FROM node:latest as runner
 
 WORKDIR /run
 
