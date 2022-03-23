@@ -1,22 +1,22 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: kubernetes-ingress
+  name: node-testing
   annotations:
     kubernetes.io/tls-acme: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   ingressClassName: kong
   tls:
-  - secretName: kube.internal.id.ssl
+  - secretName: backend-uat.allcare.id.ssl
     hosts:
-    - kube.internal.id
+    - backend-uat.allcare.id
   rules:
-  - host: kube.internal.id
+  - host: backend-uat.allcare.id
     http:
       paths:
-      - path: /
-        pathType: Prefix
+      - path: /test
+        pathType: ImplementationSpecific
         backend:
           service:
             name: node-hello-service
