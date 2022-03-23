@@ -19,6 +19,7 @@ spec:
       containers:
         - name: "node-hello"
           image: "coverid/node-hello"
+          imagePullPolicy: Never
           resources:
             requests:
               memory: "64Mi"
