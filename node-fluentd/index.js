@@ -8,6 +8,7 @@
 const express = require("express");
 const axios = require("axios");
 const app = express();
+const defaultRoute = "/test";
 
 // const FluentClient = require("@fluent-org/logger").FluentClient;
 // const logger = new FluentClient("node-app", {
@@ -18,7 +19,7 @@ const app = express();
 //   },
 // });
 
-app.get("/", function (req, res) {
+app.get(`${defaultRoute}`, function (req, res) {
   let obj = {
     endpoints: ["/ping", "/current-date", "/fact"],
   };
@@ -26,12 +27,12 @@ app.get("/", function (req, res) {
   res.send(obj);
 });
 
-app.get("/ping", function (req, res) {
+app.get(`${defaultRoute}/ping`, function (req, res) {
   // logger.emit("/ping", {});
   res.send("pong");
 });
 
-app.get("/current-date", function (req, res) {
+app.get(`${defaultRoute}/current-date`, function (req, res) {
   let obj = {
     name: "current",
     value: new Date(),
@@ -40,7 +41,7 @@ app.get("/current-date", function (req, res) {
   res.send(obj);
 });
 
-app.get("/fact", function (req, res) {
+app.get(`${defaultRoute}/fact`, function (req, res) {
   axios
     .get("http://catfact.ninja/fact")
     .then((response) => {
